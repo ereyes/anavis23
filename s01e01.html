@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s01e01.html</title>
+</head>
+<body>
+    <h1>Population des villes</h1>
+    <p>Ce graphique montre la distribution de la population de 17 villes du monde.</p>
+    <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTxUwZ2douMDjLkCG2QLTHhBDiltDKH8M4Qi8-rMuidu033mMVPW-8ZCoNH5RjwEPHcnqPZ2-bE05at/pubchart?oid=1450318975&amp;format=interactive"></iframe>
+    <p>Source : Wikidata.</p>
+
+    <hr>
+
+    <h2>Graphique fait avec Plotly</h2>
+    <p>Ce graphique montre les villes et le nombre de femmes recensées de la population.</p>
+    <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~ereyesnet/14.embed"></iframe>
+    <p>Source : Wikidata.</p>
+    <p>URL de la requête Wikidata : <a href="https://w.wiki/7qP2">https://w.wiki/7qP2</a></p>
+    <p>Code SPARQL de la requête : </p>
+    <p>
+        <pre>
+            SELECT ?city ?cityLabel ?female_population ?continent ?continentLabel ?country ?countryLabel ?coordinate_location WHERE {
+                SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+                ?city wdt:P31 wd:Q515;
+                  wdt:P1539 ?female_population.
+                ?city wdt:P30 ?continent.
+                ?city wdt:P17 ?country.
+                ?city wdt:P625 ?coordinate_location.
+              }
+              LIMIT 100
+        </pre>
+    </p>
+</body>
+</html>
