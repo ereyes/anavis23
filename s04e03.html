@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+  <h1>Spotify Top 50 2020</h1>
+  <p>Graphique fait avec Vega.</p>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A scatterplot showing horsepower and miles per gallons that opens a Google search for the car that you click on.",
+  "data": {"url": "https://api.npoint.io/1886523df53244738199"},
+  "mark": "point",
+  "transform": [
+    {
+      "calculate": "'https://open.spotify.com/track/' + datum.track_id",
+      "as": "url"
+    }
+  ],
+  "encoding": {
+    "x": {"field": "danceability", "type": "quantitative"},
+    "y": {"field": "duration_ms", "type": "quantitative"},
+    "color": {"field": "genre", "type": "nominal"},
+    "tooltip": {"field": "track_name", "type": "nominal"},
+    "href": {"field": "url", "type": "nominal"}
+  },
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
